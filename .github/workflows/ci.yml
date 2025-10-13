@@ -1,9 +1,7 @@
-name: CI/CD Node.js - Generaateur de citations
+name: CI/CD Node.js - Générateur de citations
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
     branches: [ main ]
 
 jobs:
@@ -17,9 +15,42 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-        
+
       - name: Install dependencies
         run: npm ci
-        
+
       - name: Run tests
         run: npm test
+
+  deploy:
+    name : Continuous Deployment
+    runs-on: ubuntu-latest
+    needs : build-and-test
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Générer le fichier index.html
+        run: |
+          echo '<!DOCTYPE html>' > index.html
+          echo '<html lang="fr">' >> index.html
+          echo '  <head>' >> index.html
+          echo '    <meta charset="UTF-8">' >> index.html
+          echo '    <title>Générateur de citations</title>' >> index.html
+          echo '  </head>' >> index.html
+          echo '  <body>' >> index.html
+          echo '    <h1 id="citation"></h1>' >> index.html
+          echo '    <script type="module">' >> index.html
+          echo '      import citationAleatoire from "../src/app.js";' >> index.html
+          echo '      document.getElementById("citation").innerText = citationAleatoire();' >> index.html
+          echo '    </script>' >> index.html
+          echo '  </body>' >> index.html
+          echo '</html>' >> index.html
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./
