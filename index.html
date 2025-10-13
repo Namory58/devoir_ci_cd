@@ -1,15 +1,35 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
+ <head>
 <meta charset="UTF-8">
 <title>Générateur de citations</title>
+<style>
+body { font-family: Arial, sans-serif; padding: 20px; }
+button { margin-top: 10px; padding: 5px 10px; }
+</style>
 </head>
 <body>
-<h1 id="citation"></h1>
+<h1 id="citation">Votre citation apparaîtra ici</h1>
 <p>Voici la citation</p>
-<script type="module">
-import citationAleatoire from "./src/app.js";
-document.getElementById("citation").innerText = citationAleatoire();
+<button id="nouvelle-citation">Nouvelle citation</button>
+ <script>
+const citations = [
+"Le succès vient à ceux qui persévèrent.",
+"La vie est un mystère à vivre, non un problème à résoudre.",
+"Rien n'est impossible à celui qui croit.",
+"Chaque jour est une nouvelle chance de réussir."
+];
+function citationAleatoire() {
+const index = Math.floor(Math.random() * citations.length);
+return citations[index];
+}
+const citationElement = document.getElementById("citation");
+const bouton = document.getElementById("nouvelle-citation");
+citationElement.innerText = citationAleatoire();
+
+bouton.addEventListener("click", () => {
+citationElement.innerText = citationAleatoire();
+});
 </script>
 </body>
 </html>
