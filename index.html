@@ -1,12 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="fr">
+  <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Bienvenue s u r l e TP CI/CD</h1>
-    <p>Ce s i t e a e t e d e plo y e automatiquement par GitHub Ac tion s .</p>
-</body>
+    <title>Générateur de citations</title>
+  </head>
+  <body>
+    <h1 id="citation"></h1>
+
+    <script type="module">
+      import citationAleatoire from "../src/app.js";
+
+      const citationElement = document.getElementById("citation");
+      citationElement.innerText = citationAleatoire();
+    </script>
+  </body>
 </html>
