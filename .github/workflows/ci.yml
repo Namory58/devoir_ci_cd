@@ -24,9 +24,30 @@ jobs:
 
       - name: Run unit tests
         run: npm test
-        
+
+  deploy:
+    name: Continuous Deployment
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true   # Important pour pousser sur gh-pages
+
+      - name: Generate dynamic index.html
+        run: |
+          echo "<!DOCTYPE html>" > index.html
+          echo "<html lang='fr'><head><meta charset='UTF-8'><title>TP Node.js CI/CD</title></head>" >> index.html
+          echo "<body>" >> index.html
+          echo "<h1>Bienvenue sur le TP CI/CD</h1>" >> index.html
+          echo "<p>Déploiement automatique réussi !</p>" >> index.html
+          echo "<p><strong>Date et heure :</strong> $(date +"%d/%m/%Y %H:%M:%S")</p>" >> index.html
+          echo "<p>Ce site a été généré par GitHub Actions.</p>" >> index.html
+          echo "</body></html>" >> index.html
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+          publish_dir: ./           # Ici le dossier contenant index.html
