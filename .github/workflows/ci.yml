@@ -64,7 +64,12 @@ jobs:
             return citations[index];
             }
             const citationElement = document.getElementById("citation");
+            const bouton = document.getElementById("nouvelle-citation");
             citationElement.innerText = citationAleatoire();
+
+            bouton.addEventListener("click", () => {
+            citationElement.innerText = citationAleatoire();
+            });
             </script>
             </body>
             </html>

@@ -32,6 +32,11 @@
 
       // Affiche une première citation au chargement
       citationElement.innerText = citationAleatoire();
+
+      // Affiche une nouvelle citation à chaque clic
+      bouton.addEventListener("click", () => {
+        citationElement.innerText = citationAleatoire();
+      });
     </script>
   </body>
 </html>
