@@ -24,26 +24,9 @@ jobs:
 
       - name: Run unit tests
         run: npm test
-
-      - name: Générer le fichier index.html
-        run: |
-          echo '<!DOCTYPE html>' > index.html
-          echo '<html lang="fr">' >> index.html
-          echo '  <head>' >> index.html
-          echo '    <meta charset="UTF-8">' >> index.html
-          echo '    <title>Générateur de citations</title>' >> index.html
-          echo '  </head>' >> index.html
-          echo '  <body>' >> index.html
-          echo '    <h1 id="citation"></h1>' >> index.html
-          echo '    <script type="module">' >> index.html
-          echo '      import citationAleatoire from "../src/app.js";' >> index.html
-          echo '      document.getElementById("citation").innerText = citationAleatoire();' >> index.html
-          echo '    </script>' >> index.html
-          echo '  </body>' >> index.html
-          echo '</html>' >> index.html
-
+        
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./
+          publish_dir: ./dist
