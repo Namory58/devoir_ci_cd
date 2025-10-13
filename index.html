@@ -10,8 +10,6 @@ button { margin-top: 10px; padding: 5px 10px; }
 </head>
 <body>
 <h1 id="citation">Votre citation apparaîtra ici</h1>
-<p>Voici la citation</p>
-<button id="nouvelle-citation">Nouvelle citation</button>
  <script>
 const citations = [
 "Le succès vient à ceux qui persévèrent.",
@@ -24,12 +22,7 @@ const index = Math.floor(Math.random() * citations.length);
 return citations[index];
 }
 const citationElement = document.getElementById("citation");
-const bouton = document.getElementById("nouvelle-citation");
 citationElement.innerText = citationAleatoire();
-
-bouton.addEventListener("click", () => {
-citationElement.innerText = citationAleatoire();
-});
 </script>
 </body>
 </html>
