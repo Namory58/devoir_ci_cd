@@ -35,16 +35,25 @@ jobs:
         with:
           persist-credentials: true   # Important pour pousser sur gh-pages
 
-      - name: Generate dynamic index.html
+      - name: Générer le fichier index.html
         run: |
-          echo "<!DOCTYPE html>" > index.html
-          echo "<html lang='fr'><head><meta charset='UTF-8'><title>TP Node.js CI/CD</title></head>" >> index.html
-          echo "<body>" >> index.html
-          echo "<h1>Bienvenue sur le TP CI/CD</h1>" >> index.html
-          echo "<p>Déploiement automatique réussi !</p>" >> index.html
-          echo "<p><strong>Date et heure :</strong> $(date +"%d/%m/%Y %H:%M:%S")</p>" >> index.html
-          echo "<p>Ce site a été généré par GitHub Actions.</p>" >> index.html
-          echo "</body></html>" >> index.html
+            cat > index.html << 'EOF'
+            <!DOCTYPE html>
+            <html lang="fr">
+            <head>
+            <meta charset="UTF-8">
+            <title>Générateur de citations</title>
+            </head>
+            <body>
+            <h1 id="citation"></h1>
+            <p>Voici la citation</p>
+            <script type="module">
+            import citationAleatoire from "./src/app.js";
+            document.getElementById("citation").innerText = citationAleatoire();
+            </script>
+            </body>
+            </html>
+            EOF
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3

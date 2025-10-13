@@ -6,12 +6,11 @@
   </head>
   <body>
     <h1 id="citation"></h1>
-
+    <p>Voici la citation</p>
     <script type="module">
-      import citationAleatoire from "../src/app.js";
+      import citationAleatoire from "./src/app.js";
 
-      const citationElement = document.getElementById("citation");
-      citationElement.innerText = citationAleatoire();
+      document.getElementById("citation").innerText = citationAleatoire();
     </script>
   </body>
 </html>
