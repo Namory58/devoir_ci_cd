@@ -37,7 +37,6 @@ jobs:
 
       - name: Générer le fichier index.html
         run: |
-            cat > index.html << 'EOF'
             <!DOCTYPE html>
             <html lang="fr">
              <head>
