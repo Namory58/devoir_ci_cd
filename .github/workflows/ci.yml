@@ -37,6 +37,7 @@ jobs:
 
       - name: Générer le fichier index.html
         run: |
+            cat > index.html << 'EOF'
             <!DOCTYPE html>
             <html lang="fr">
              <head>
@@ -65,10 +66,11 @@ jobs:
             </script>
             </body>
             </html>
+            EOF
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
 
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GH_PAT }}
           publish_dir: ./           # Ici le dossier contenant index.html
