@@ -7,3 +7,4 @@ test ("La fonction retourne une citation", () => {
 }) ;
 
 // Pour exécuter ce test, utilisez la commande : npx jest tests/app.test.js
+// Assurez-vous que Jest est installé dans votre projet : npm install --save-dev jest
