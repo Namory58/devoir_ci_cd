@@ -12,4 +12,3 @@ function citationsAleatoire() {
 
 module.exports = citationsAleatoire;
 
-// Exemple d'utilisation
